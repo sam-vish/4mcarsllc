@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trucks, Jeeps & Used Cars in Orlando — 4M Cars LLC, Landstreet Rd</title>
+    <meta name="description"
+        content="4M Cars LLC on Landstreet Rd, Orlando. 50+ used trucks, Jeeps, SUVs and cars. 3-month warranty, financing with passport or ITIN, $1,500 down. Se habla español." />
+    <meta property="og:title" content="Trucks, Jeeps & Used Cars in Orlando — 4M Cars LLC" />
+    <meta property="og:description"
+        content="50+ used trucks, Jeeps, SUVs and cars on Landstreet Rd. 3-month warranty. Financing with passport or ITIN. Se habla español." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts: Barlow Condensed (display) + Barlow (body). Automotive, athletic, distinct from MA's Bricolage/Inter. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CDN (same pattern as MA / GHL Vibe) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Barlow', 'system-ui', 'sans-serif'],
+                        display: ['"Barlow Condensed"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        // ===== DEALER TOKENS — only these two change per dealer =====
+                        brand: 'var(--brand)',            // 4M red
+                        'brand-hover': 'var(--brand-hover)',
+                        // =============================================================
+                        steel: '#B9BDC3',
+                        asphalt: '#1C1D20',
+                        tarmac: '#26282C',
+                        chalk: '#F2F1EE',
+                        smoke: '#8E9197',
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- Lucide icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --brand: #D71920;
+            --brand-hover: #B8141A;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Diagonal hatch — a nod to the texture on their current DealerCenter site */
+        .hatch {
+            background-color: #1C1D20;
+            background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 9px);
+        }
+
+        /* Brushed-steel top rule used on section headers */
+        .steel-rule {
+            height: 3px;
+            background: linear-gradient(90deg, #E9EBEE, #9DA1A7 40%, #D71920 40%, #D71920 100%);
+        }
+
+        /* Inventory rail: scroll-snap, hide scrollbar */
+        .rail {
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .rail::-webkit-scrollbar {
+            display: none;
+        }
+
+        .rail>* {
+            scroll-snap-align: start;
+        }
+
+        /* Price tag: condensed, tight, big — the memorable element */
+        .tag {
+            font-family: "Barlow Condensed", sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            line-height: 0.9;
+        }
+
+        /* Keyboard focus that is visible on dark */
+        :focus-visible {
+            outline: 2px solid #FFFFFF;
+            outline-offset: 3px;
+        }
+
+        /* Single page-load moment: hero headline only */
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .rise {
+            animation: rise .8s cubic-bezier(.16, 1, .3, 1) both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rise {
+                animation: none;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        .brand-btn {
+            background: var(--brand);
+        }
+
+        .brand-btn:hover {
+            background: var(--brand-hover);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-asphalt font-sans text-chalk selection:bg-brand/50">
+
+    <!-- ============================================================
+       DEALER CONFIG (edit here; everything below reads from this)
+       ============================================================ -->
+    <script>
+        const DEALER = {
+            name: "4M Cars LLC",
+            shortName: "4M Cars",
+            phoneDisplay: "(321) 310-5159",
+            phoneTel: "+13213105159",
+            whatsapp: "https://wa.me/13213105159",
+            email: "4mcarsllc@gmail.com",
+            address1: "1543 W Landstreet Rd",
+            address2: "Orlando, FL 32824",
+            mapsUrl: "https://maps.app.goo.gl/aY1vFDcGh2sJPYKU7",
+            googleReviewsUrl: "https://share.google/HLoHSlwFVR2nLjspr",
+            instagram: "https://www.instagram.com/4mcarsflorida",
+            tiktok: "https://www.tiktok.com/@4mcarsflorida",
+            hours: [["Mon – Fri", "10:00 AM – 7:00 PM"], ["Sat", "10:30 AM – 6:00 PM"], ["Sun", "10:00 AM – 7:00 PM"]],
+            inventoryCount: "50+",
+            // DealerCenter pages — these stay exactly as on the original site
+            dc: {
+                home: "https://www.4mcars.com/",
+                inventory: "https://www.4mcars.com/inventory/",
+                warranty: "https://www.4mcars.com/warranty/",
+                apply: "https://www.4mcars.com/apply-online/",
+                about: "https://www.4mcars.com/about-us/",
+                contact: "https://www.4mcars.com/contact-us/",
+                testDrive: "https://www.4mcars.com/schedule-a-test-drive/",
+                priceLowHigh: "https://www.4mcars.com/inventory/?sort_by=price_asc",
+                priceHighLow: "https://www.4mcars.com/inventory/?sort_by=price_desc",
+                newestFirst: "https://www.4mcars.com/inventory/?sort_by=year_desc",
+                lowMiles: "https://www.4mcars.com/inventory/?sort_by=miles_asc",
+            },
+            // Logo: swap with the light-on-dark PNG/SVG from the dealer. Placeholder = their live header logo.
+            logoHeader: "https://dcdws.blob.core.windows.net/dws-23326769-71129-media/sites/71129/2026/05/cropped-4M-RAPTOR-w300.png",
+            // GHL chat widget — REPLACE with 4M's sub-account widget id
+            ghlWidgetId: "REPLACE_WITH_4M_GHL_WIDGET_ID",
+        };
+    </script>
+
+    <!-- Announcement bar -->
+    <div class="bg-brand px-4 py-2 text-center text-sm font-semibold text-white">
+        <span class="inline-flex flex-wrap items-center justify-center gap-x-3">
+            <i data-lucide="shield-check" class="h-4 w-4"></i>
+            <span>3-month warranty on every vehicle</span>
+            <span class="hidden text-white/60 sm:inline">|</span>
+            <span class="hidden sm:inline">Financing with passport or ITIN</span>
+            <span class="hidden text-white/60 md:inline">|</span>
+            <span class="hidden md:inline">Hablamos español</span>
+        </span>
+    </div>
+
+    <!-- Header — nav mirrors the original DealerCenter site 1:1 and deep-links to it -->
+    <header class="sticky top-0 z-40 border-b border-white/10 bg-asphalt/95 backdrop-blur">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8">
+            <a href="#top" class="flex items-center" aria-label="4M Cars LLC home">
+                <img data-logo alt="4M Cars LLC" class="h-9 w-auto object-contain sm:h-11" />
+            </a>
+
+            <nav class="hidden items-center gap-7 lg:flex" data-nav-desktop></nav>
+
+            <div class="hidden items-center gap-4 lg:flex">
+                <a data-tel
+                    class="flex items-center gap-2 font-display text-lg font-semibold text-chalk hover:text-white">
+                    <i data-lucide="phone" class="h-4 w-4 text-brand"></i><span data-phone></span>
+                </a>
+                <a data-dc="apply" target="_blank" rel="noopener noreferrer"
+                    class="brand-btn rounded-md px-5 py-2.5 font-display text-lg font-bold uppercase tracking-wide text-white transition-colors">Apply
+                    online</a>
+            </div>
+
+            <button type="button" aria-label="Toggle menu" aria-expanded="false" data-menu-toggle
+                class="flex h-10 w-10 items-center justify-center rounded-md border border-white/20 text-chalk lg:hidden">
+                <i data-lucide="menu" class="h-5 w-5"></i>
+            </button>
+        </div>
+
+        <div data-mobile-menu class="hidden border-t border-white/10 bg-asphalt px-5 py-5 lg:hidden">
+            <nav class="flex flex-col gap-4" data-nav-mobile></nav>
+            <a data-tel class="mt-5 flex items-center gap-2 font-display text-xl font-semibold text-chalk"><i
+                    data-lucide="phone" class="h-4 w-4 text-brand"></i><span data-phone></span></a>
+            <a data-dc="apply" target="_blank" rel="noopener noreferrer"
+                class="brand-btn mt-4 block rounded-md px-5 py-3 text-center font-display text-lg font-bold uppercase tracking-wide text-white">Apply
+                online</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ================= HERO ================= -->
+        <section id="top" class="hatch relative overflow-hidden">
+            <div
+                class="mx-auto grid max-w-7xl items-end gap-10 px-5 pb-10 pt-14 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:pb-14 lg:pt-20">
+                <div class="rise">
+                    <p class="font-display text-xl font-semibold text-steel">Landstreet Rd, Orlando</p>
+                    <h1
+                        class="mt-3 font-display text-6xl font-black uppercase leading-[0.88] tracking-tight text-white sm:text-7xl lg:text-8xl">
+                        Trucks, Jeeps,<br />and 4x4s<br />built for Florida.
+                    </h1>
+                    <p class="mt-6 max-w-lg text-lg leading-relaxed text-steel">
+                        <span data-count></span> used trucks, Jeeps, SUVs and cars on the lot right now, every one with
+                        a 3-month warranty. Financing with a passport or ITIN, from $1,500 down. Come see it, drive it,
+                        and drive it home.
+                    </p>
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                        <a data-dc="inventory" target="_blank" rel="noopener noreferrer"
+                            class="brand-btn inline-flex items-center justify-center gap-2 rounded-md px-7 py-4 font-display text-xl font-bold uppercase tracking-wide text-white transition-colors">
+                            See all <span data-count></span> vehicles <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#test-drive"
+                            class="inline-flex items-center justify-center gap-2 rounded-md border border-white/30 px-7 py-4 font-display text-xl font-bold uppercase tracking-wide text-white transition-colors hover:border-white hover:bg-white/5">
+                            Book a test drive
+                        </a>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-smoke">
+                        <span class="flex items-center gap-2"><i data-lucide="shield-check"
+                                class="h-4 w-4 text-brand"></i>3-month warranty</span>
+                        <span class="flex items-center gap-2"><i data-lucide="file-badge"
+                                class="h-4 w-4 text-brand"></i>Passport / ITIN financing</span>
+                        <span class="flex items-center gap-2"><i data-lucide="languages"
+                                class="h-4 w-4 text-brand"></i>English & Spanish</span>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <!-- PLACEHOLDER hero image. Swap for a 4M lot shot (lifted Jeep with flags is the one). -->
+                    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1600&q=80"
+                        alt="Lifted Jeep Wrangler on the lot at 4M Cars, Orlando"
+                        class="aspect-[4/3] w-full rounded-lg object-cover" loading="eager" />
+                    <div class="absolute bottom-4 left-4 rounded-md bg-asphalt/90 px-4 py-3">
+                        <p class="font-display text-sm font-semibold uppercase tracking-wider text-steel">On the lot now
+                        </p>
+                        <p class="font-display text-2xl font-bold text-white">Lifted, 4WD, ready to go</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= INVENTORY RAIL (the "better catalogue") ================= -->
+        <section id="inventory" class="border-y border-white/10 bg-tarmac py-16 sm:py-20">
+            <div class="mx-auto max-w-7xl px-5 sm:px-8">
+                <div class="steel-rule w-24"></div>
+                <div class="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+                    <div>
+                        <h2 class="font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl">Just
+                            landed</h2>
+                        <p class="mt-3 max-w-xl text-steel">Real prices, real mileage, no "call for price." Tap a
+                            vehicle to see photos, CarFax and the window sticker on our inventory site.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" data-rail-prev aria-label="Previous vehicles"
+                            class="flex h-11 w-11 items-center justify-center rounded-md border border-white/20 text-white hover:bg-white/5"><i
+                                data-lucide="chevron-left" class="h-5 w-5"></i></button>
+                        <button type="button" data-rail-next aria-label="Next vehicles"
+                            class="flex h-11 w-11 items-center justify-center rounded-md border border-white/20 text-white hover:bg-white/5"><i
+                                data-lucide="chevron-right" class="h-5 w-5"></i></button>
+                    </div>
+                </div>
+
+                <div data-rail class="rail mt-10 -mx-5 flex gap-5 overflow-x-auto px-5 pb-4 sm:mx-0 sm:px-0"></div>
+
+                <!-- Browse shortcuts → DealerCenter sort/filter URLs -->
+                <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" data-browse></div>
+            </div>
+        </section>
+
+        <!-- ================= WARRANTY — 4M's differentiator ================= -->
+        <section id="warranty" class="hatch py-16 sm:py-20">
+            <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-2">
+                <div>
+                    <div class="steel-rule w-24"></div>
+                    <h2 class="mt-5 font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl">
+                        Every car leaves with a 3-month warranty</h2>
+                    <p class="mt-5 max-w-xl text-lg text-steel">Most small lots sell as-is. We don't. Every vehicle at
+                        4M Cars is inspected before it's listed and covered for three months after you drive off, so the
+                        first oil change isn't the first surprise.</p>
+                    <ul class="mt-7 space-y-3 text-chalk">
+                        <li class="flex items-start gap-3"><i data-lucide="check"
+                                class="mt-1 h-5 w-5 shrink-0 text-brand"></i>Inspected before listing: runs, drives,
+                            cold A/C, no leaks</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check"
+                                class="mt-1 h-5 w-5 shrink-0 text-brand"></i>Clean titles, CarFax available on every
+                            listing</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check"
+                                class="mt-1 h-5 w-5 shrink-0 text-brand"></i>3 months of coverage included in the price
+                        </li>
+                    </ul>
+                    <a data-dc="warranty" target="_blank" rel="noopener noreferrer"
+                        class="mt-8 inline-flex items-center gap-2 rounded-md border border-white/30 px-6 py-3 font-display text-lg font-bold uppercase tracking-wide text-white hover:border-white hover:bg-white/5">Read
+                        the warranty details <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+                </div>
+                <div class="relative">
+                    <!-- PLACEHOLDER — swap for a shop / inspection / engine-bay shot from the dealer -->
+                    <img src="https://images.unsplash.com/photo-1487754180451-c456f25e1d5e?auto=format&fit=crop&w=1400&q=80"
+                        alt="Vehicle inspection before listing" class="aspect-[5/4] w-full rounded-lg object-cover"
+                        loading="lazy" />
+                    <div class="absolute -bottom-5 -left-3 rounded-md bg-brand px-6 py-4 sm:-left-6">
+                        <p class="tag text-6xl text-white">3<span class="text-3xl">mo</span></p>
+                        <p class="mt-1 font-display font-semibold uppercase tracking-wider text-white/90">Warranty
+                            included</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FINANCING ================= -->
+        <section id="financing" class="border-y border-white/10 bg-tarmac py-16 sm:py-20">
+            <div class="mx-auto max-w-7xl px-5 sm:px-8">
+                <div class="steel-rule w-24"></div>
+                <div class="mt-5 grid gap-10 lg:grid-cols-[1fr_1fr]">
+                    <div>
+                        <h2 class="font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl">
+                            Financing that works with your situation</h2>
+                        <p class="mt-5 max-w-xl text-lg text-steel">No social? No problem. We finance with a passport or
+                            ITIN, and we work with first-time buyers and every credit tier. Start with as little as
+                            $1,500 down.</p>
+                        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                            <a data-dc="apply" target="_blank" rel="noopener noreferrer"
+                                class="brand-btn inline-flex items-center justify-center gap-2 rounded-md px-7 py-4 font-display text-xl font-bold uppercase tracking-wide text-white transition-colors">Apply
+                                online now <i data-lucide="arrow-up-right" class="h-5 w-5"></i></a>
+                            <a data-wa target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center justify-center gap-2 rounded-md border border-white/30 px-7 py-4 font-display text-xl font-bold uppercase tracking-wide text-white hover:border-white hover:bg-white/5"><i
+                                    data-lucide="message-circle" class="h-5 w-5"></i>Ask on WhatsApp</a>
+                        </div>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-3">
+                        <div class="rounded-lg border border-white/10 bg-asphalt p-6">
+                            <p class="tag text-5xl text-white">$1,500</p>
+                            <p class="mt-2 font-display text-lg font-semibold uppercase tracking-wide text-steel">Down
+                                to start</p>
+                        </div>
+                        <div class="rounded-lg border border-white/10 bg-asphalt p-6">
+                            <p class="tag text-5xl text-white">ITIN</p>
+                            <p class="mt-2 font-display text-lg font-semibold uppercase tracking-wide text-steel">Or
+                                passport accepted</p>
+                        </div>
+                        <div class="rounded-lg border border-white/10 bg-asphalt p-6">
+                            <p class="tag text-5xl text-white">All</p>
+                            <p class="mt-2 font-display text-lg font-semibold uppercase tracking-wide text-steel">Credit
+                                tiers reviewed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HOW IT WORKS (a real sequence, so numbers are earned) ================= -->
+        <section id="how" class="hatch py-16 sm:py-20">
+            <div class="mx-auto max-w-7xl px-5 sm:px-8">
+                <div class="steel-rule w-24"></div>
+                <h2 class="mt-5 font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl">Find it
+                    tonight, drive it tomorrow</h2>
+                <ol class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4" data-steps></ol>
+            </div>
+        </section>
+
+        <!-- ================= REVIEWS (renders only when REVIEWS has real entries) ================= -->
+        <section id="reviews" class="border-y border-white/10 bg-tarmac py-16 sm:py-20">
+            <div class="mx-auto max-w-7xl px-5 sm:px-8">
+                <div class="steel-rule w-24"></div>
+                <div class="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+                    <h2 class="font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl">What
+                        buyers say</h2>
+                    <a data-gbp target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 font-display text-lg font-semibold text-steel hover:text-white">Read
+                        our Google reviews <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+                </div>
+                <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3" data-reviews></div>
+            </div>
+        </section>
+
+        <!-- ================= TEST DRIVE FORM → GHL ================= -->
+        <section id="test-drive" class="hatch py-16 sm:py-20">
+            <div class="mx-auto max-w-3xl px-5 sm:px-8">
+                <div class="rounded-lg border border-white/10 bg-tarmac p-7 sm:p-10">
+                    <h2 class="font-display text-4xl font-black uppercase leading-none text-white sm:text-5xl">Book a
+                        test drive</h2>
+                    <p class="mt-3 text-steel">Tell us which vehicle and when. We'll have it pulled up front and ready
+                        when you arrive. Reserva tu prueba de manejo — te atendemos en español.</p>
+
+                    <form data-lead-form class="mt-8 space-y-5" novalidate>
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <label class="block">
+                                <span class="mb-2 block text-sm font-semibold text-chalk">Full name</span>
+                                <input name="name" autocomplete="name" required
+                                    class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                                    placeholder="Carlos Rivera" />
+                            </label>
+                            <label class="block">
+                                <span class="mb-2 block text-sm font-semibold text-chalk">Phone</span>
+                                <input name="phone" type="tel" autocomplete="tel" required
+                                    class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                                    placeholder="(321) 555-0100" />
+                            </label>
+                        </div>
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <label class="block">
+                                <span class="mb-2 block text-sm font-semibold text-chalk">Email</span>
+                                <input name="email" type="email" autocomplete="email"
+                                    class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                                    placeholder="carlos@email.com" />
+                            </label>
+                            <label class="block">
+                                <span class="mb-2 block text-sm font-semibold text-chalk">Preferred language</span>
+                                <select name="language"
+                                    class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white focus:border-brand focus:outline-none">
+                                    <option value="en">English</option>
+                                    <option value="es">Español</option>
+                                </select>
+                            </label>
+                        </div>
+                        <label class="block">
+                            <span class="mb-2 block text-sm font-semibold text-chalk">Which vehicle?</span>
+                            <input name="vehicle"
+                                class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                                placeholder="e.g. 2019 F-150, a lifted Jeep, or anything under $10K" />
+                        </label>
+                        <label class="block">
+                            <span class="mb-2 block text-sm font-semibold text-chalk">When works for you?</span>
+                            <input name="when"
+                                class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                                placeholder="Saturday afternoon, tomorrow after 5, etc." />
+                        </label>
+
+                        <!-- SMS consent — carrier-required language, keep verbatim -->
+                        <div class="space-y-3 rounded-md border border-white/10 bg-asphalt p-5">
+                            <label class="flex items-start gap-3 text-sm leading-relaxed text-steel">
+                                <input type="checkbox" name="sms_marketing"
+                                    class="mt-1 h-4 w-4 accent-[var(--brand)]" />
+                                <span>I consent to receive marketing text messages about special offers, discounts, and
+                                    service updates from <span data-name></span> at the phone number provided. Message
+                                    frequency may vary. Message and data rates may apply. Text HELP for assistance,
+                                    reply STOP to opt out.</span>
+                            </label>
+                            <label class="flex items-start gap-3 text-sm leading-relaxed text-steel">
+                                <input type="checkbox" name="sms_nonmarketing"
+                                    class="mt-1 h-4 w-4 accent-[var(--brand)]" />
+                                <span>I consent to receive non-marketing text messages from <span data-name></span>
+                                    about vehicle inquiries, vehicle availability, financing updates, appointment
+                                    reminders, and service-related updates. Message frequency may vary. Message and data
+                                    rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+                            </label>
+                        </div>
+
+                        <p data-form-error class="hidden text-sm text-red-300"></p>
+                        <button type="submit"
+                            class="brand-btn w-full rounded-md px-6 py-4 font-display text-xl font-bold uppercase tracking-wide text-white transition-colors">Book
+                            my test drive</button>
+                        <p class="text-center text-xs leading-relaxed text-smoke">By submitting, you consent to be
+                            contacted by <span data-name></span> via call and email regarding your inquiry. SMS consent
+                            is optional and not required to submit this form. Consent is not a condition of purchase.
+                        </p>
+                    </form>
+
+                    <div data-lead-success
+                        class="mt-8 hidden rounded-md border border-brand/40 bg-brand/10 p-8 text-center">
+                        <i data-lucide="check-circle-2" class="mx-auto h-12 w-12 text-brand"></i>
+                        <h3 class="mt-4 font-display text-3xl font-bold uppercase text-white">Test drive booked</h3>
+                        <p class="mt-2 text-steel">We'll confirm by text or call shortly and have the vehicle ready when
+                            you arrive.</p>
+                        <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                            <a data-dc="inventory" target="_blank" rel="noopener noreferrer"
+                                class="rounded-md border border-white/30 px-6 py-3 font-display text-lg font-bold uppercase tracking-wide text-white hover:bg-white/5">Keep
+                                browsing</a>
+                            <button type="button" data-lead-reset
+                                class="rounded-md border border-white/30 px-6 py-3 font-display text-lg font-bold uppercase tracking-wide text-white hover:bg-white/5">Book
+                                another</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FAQ ================= -->
+        <section id="faq" class="border-y border-white/10 bg-tarmac py-16 sm:py-20">
+            <div class="mx-auto max-w-3xl px-5 sm:px-8">
+                <div class="steel-rule w-24"></div>
+                <h2 class="mt-5 font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl">
+                    Questions, answered</h2>
+                <div class="mt-8 divide-y divide-white/10 border-y border-white/10" data-faq></div>
+            </div>
+        </section>
+
+        <!-- ================= VISIT ================= -->
+        <section id="visit" class="hatch py-16 sm:py-20">
+            <div class="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_1.2fr]">
+                <div>
+                    <div class="steel-rule w-24"></div>
+                    <h2 class="mt-5 font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl">Come
+                        see us on Landstreet</h2>
+                    <p class="mt-4 text-steel">Inside the Landstreet Automall, south of the airport. Pull in, walk the
+                        lot, no appointment needed.</p>
+                    <address class="mt-7 space-y-4 not-italic text-chalk">
+                        <p class="flex items-start gap-3"><i data-lucide="map-pin"
+                                class="mt-1 h-5 w-5 shrink-0 text-brand"></i><span><span data-addr1></span><br /><span
+                                    data-addr2></span></span></p>
+                        <p class="flex items-center gap-3"><i data-lucide="phone"
+                                class="h-5 w-5 shrink-0 text-brand"></i><a data-tel
+                                class="font-semibold hover:text-white"><span data-phone></span></a></p>
+                        <p class="flex items-center gap-3"><i data-lucide="mail"
+                                class="h-5 w-5 shrink-0 text-brand"></i><a data-mail class="hover:text-white"><span
+                                    data-email></span></a></p>
+                    </address>
+                    <dl class="mt-7 grid max-w-sm grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-chalk" data-hours></dl>
+                    <a data-maps target="_blank" rel="noopener noreferrer"
+                        class="mt-8 inline-flex items-center gap-2 rounded-md border border-white/30 px-6 py-3 font-display text-lg font-bold uppercase tracking-wide text-white hover:border-white hover:bg-white/5">Get
+                        directions <i data-lucide="navigation" class="h-4 w-4"></i></a>
+                </div>
+                <div class="overflow-hidden rounded-lg border border-white/10">
+                    <iframe title="Map to 4M Cars LLC" data-map
+                        class="h-[360px] w-full grayscale invert-[.92] contrast-[.9] lg:h-full" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="border-t border-white/10 bg-asphalt">
+        <div class="mx-auto max-w-7xl px-5 py-14 sm:px-8">
+            <div class="grid gap-10 md:grid-cols-3">
+                <div>
+                    <img data-logo alt="4M Cars LLC" class="h-11 w-auto object-contain" />
+                    <p class="mt-4 max-w-xs text-sm leading-relaxed text-smoke">Used trucks, Jeeps, SUVs and cars on
+                        Landstreet Rd, Orlando. 3-month warranty, financing with passport or ITIN. Hablamos español.</p>
+                    <div class="mt-5 flex gap-3">
+                        <a data-ig target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                            class="flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-steel hover:border-brand hover:text-white"><i
+                                data-lucide="instagram" class="h-4 w-4"></i></a>
+                        <a data-wa target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                            class="flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-steel hover:border-brand hover:text-white"><i
+                                data-lucide="message-circle" class="h-4 w-4"></i></a>
+                        <a data-gbp target="_blank" rel="noopener noreferrer" aria-label="Google Business Profile"
+                            class="flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-steel hover:border-brand hover:text-white"><i
+                                data-lucide="map-pin" class="h-4 w-4"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-display text-lg font-bold uppercase tracking-wider text-steel">Visit us</h4>
+                    <p class="mt-4 text-sm text-chalk"><span data-addr1></span><br /><span data-addr2></span></p>
+                    <a data-tel class="mt-3 block font-display text-xl font-semibold text-white"><span
+                            data-phone></span></a>
+                    <dl class="mt-4 grid max-w-xs grid-cols-[auto_1fr] gap-x-5 gap-y-1 text-sm text-smoke" data-hours>
+                    </dl>
+                </div>
+                <div>
+                    <h4 class="font-display text-lg font-bold uppercase tracking-wider text-steel">Quick links</h4>
+                    <nav class="mt-4 flex flex-col gap-2.5 text-sm text-smoke" data-nav-footer></nav>
+                </div>
+            </div>
+            <div
+                class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-smoke sm:flex-row">
+                <p>© <span data-year></span> <span data-name></span>. All rights reserved.</p>
+                <div class="flex flex-wrap items-center gap-x-4">
+                    <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <a href="/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <a href="/sms-disclosure.html" class="hover:text-white">SMS Disclosure</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Crawlable fallback for A2P validators (no-JS) -->
+    <noscript>
+        <div style="padding:16px;font-family:sans-serif;color:#F2F1EE;background:#1C1D20">
+            <p>4M Cars LLC — 1543 W Landstreet Rd, Orlando, FL 32824 — (321) 310-5159 — 4mcarsllc@gmail.com</p>
+            <p>By providing your phone number you agree to receive text messages from 4M Cars LLC. Message frequency
+                varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a
+                condition of purchase. No mobile information will be shared with third parties or affiliates for
+                marketing purposes.</p>
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms-of-service.html">Terms of Service</a>
+                | <a href="/sms-disclosure.html">SMS Disclosure</a></p>
+        </div>
+    </noscript>
+
+    <!-- GHL chat widget — id is injected from DEALER.ghlWidgetId below -->
+
+    <script>
+        // ---------- CONTENT ----------
+        const NAV = [
+            ["Inventory", DEALER.dc.inventory, true],
+            ["Warranty", DEALER.dc.warranty, true],
+            ["Apply Online", DEALER.dc.apply, true],
+            ["About Us", DEALER.dc.about, true],
+            ["Contact Us", DEALER.dc.contact, true],
+        ];
+
+        // PLACEHOLDER featured vehicles. These are pulled from 4M's public listings as of build date and WILL go stale.
+        // Replace with live data or a weekly manual refresh. Links go to the inventory page until real VDP URLs are supplied.
+        const FEATURED = [
+            { title: "2019 Ford F-150 SuperCrew", price: 64990, miles: 101129, spec: "4WD · Automatic", img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=900&q=80", url: DEALER.dc.inventory },
+            { title: "2021 Honda Civic Sport", price: 19999, miles: 45629, spec: "FWD · Automatic", img: "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=900&q=80", url: DEALER.dc.inventory },
+            { title: "2016 Chevrolet Colorado LT", price: 15999, miles: 93115, spec: "Crew cab · Automatic", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=900&q=80", url: DEALER.dc.inventory },
+            { title: "2018 Toyota RAV4 XLE", price: 14999, miles: 92218, spec: "AWD · Automatic", img: "https://images.unsplash.com/photo-1568844293986-8d0400bd4745?auto=format&fit=crop&w=900&q=80", url: DEALER.dc.inventory },
+            { title: "2013 Jeep Wrangler", price: 10990, miles: null, spec: "4WD · Lifted", img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80", url: DEALER.dc.inventory },
+            { title: "2017 Ford Mustang", price: 10990, miles: null, spec: "RWD · Automatic", img: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=900&q=80", url: DEALER.dc.inventory },
+            { title: "2021 Hyundai Sonata SE", price: 11999, miles: 82239, spec: "FWD · Automatic", img: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=900&q=80", url: DEALER.dc.inventory },
+            { title: "2017 BMW X3", price: 9990, miles: null, spec: "AWD · Automatic", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80", url: DEALER.dc.inventory },
+        ];
+
+        const BROWSE = [
+            ["Under $10K", "Budget-ready, warranty included", DEALER.dc.priceLowHigh, "wallet"],
+            ["Trucks & 4x4s", "F-150s, Rams, Colorados, Wranglers", DEALER.dc.inventory, "truck"],
+            ["Lowest miles", "Newest arrivals with the least wear", DEALER.dc.lowMiles, "gauge"],
+            ["Newest first", "Latest model years on the lot", DEALER.dc.newestFirst, "sparkles"],
+        ];
+
+        const STEPS = [
+            ["Pick your vehicle", "Browse the full inventory with real prices, or message us on WhatsApp and we'll send you options."],
+            ["Book a test drive", "Use the form here or chat any hour. We'll have it pulled up front when you pull in."],
+            ["Apply at the lot", "One application from your phone, with a real person next to you explaining your options in English or Spanish."],
+            ["Drive it home", "Paperwork, warranty, keys. Most buyers do the whole thing in one visit."],
+        ];
+
+        // Leave empty until the dealer supplies real Google reviews. Section shows a "Read our Google reviews" link only.
+        // Shape: { name: "First L.", quote: "…", lang: "en" | "es" }
+        const REVIEWS = [];
+
+        const FAQS = [
+            ["Do you finance with a passport or ITIN?", "Yes. You don't need a social security number to apply. Bring a passport or ITIN, proof of income and proof of address, and we'll walk you through the options."],
+            ["How much do I need down?", "Financing starts at $1,500 down. The exact number depends on the vehicle and the lender, and we'll tell you before you sign anything."],
+            ["What does the 3-month warranty cover?", "Every vehicle is inspected before it's listed and covered for three months after purchase. Full terms are on our warranty page."],
+            ["Are the prices online the real prices?", "Yes. Every listing shows the actual price and mileage. There are no 'call for pricing' listings."],
+            ["Can I see the CarFax?", "Every listing on our inventory site has a CarFax report and a window sticker you can open before you visit."],
+            ["¿Hablan español?", "Sí. Todo nuestro equipo atiende en español e inglés, y puedes hacer la solicitud de financiamiento en el idioma que prefieras."],
+        ];
+
+        // ---------- HELPERS ----------
+        const $ = (s, root = document) => root.querySelector(s);
+        const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+        const money = n => "$" + n.toLocaleString("en-US");
+        const milesFmt = n => n == null ? "Mileage on listing" : n.toLocaleString("en-US") + " mi";
+
+        // ---------- RENDER ----------
+        $$("[data-logo]").forEach(el => el.src = DEALER.logoHeader);
+        $$("[data-name]").forEach(el => el.textContent = DEALER.name);
+        $$("[data-phone]").forEach(el => el.textContent = DEALER.phoneDisplay);
+        $$("[data-tel]").forEach(el => el.href = "tel:" + DEALER.phoneTel);
+        $$("[data-mail]").forEach(el => el.href = "mailto:" + DEALER.email);
+        $$("[data-email]").forEach(el => el.textContent = DEALER.email);
+        $$("[data-wa]").forEach(el => el.href = DEALER.whatsapp);
+        $$("[data-ig]").forEach(el => el.href = DEALER.instagram);
+        $$("[data-gbp]").forEach(el => el.href = DEALER.googleReviewsUrl);
+        $$("[data-maps]").forEach(el => el.href = DEALER.mapsUrl);
+        $$("[data-addr1]").forEach(el => el.textContent = DEALER.address1);
+        $$("[data-addr2]").forEach(el => el.textContent = DEALER.address2);
+        $$("[data-count]").forEach(el => el.textContent = DEALER.inventoryCount);
+        $$("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
+        $$("[data-dc]").forEach(el => el.href = DEALER.dc[el.dataset.dc]);
+        $("[data-map]").src = "https://www.google.com/maps?q=" + encodeURIComponent(DEALER.address1 + " " + DEALER.address2) + "&output=embed";
+
+        const navLink = (cls) => ([label, href, ext]) =>
+            `<a href="${href}" ${ext ? 'target="_blank" rel="noopener noreferrer"' : ""} class="${cls}">${label}</a>`;
+        $("[data-nav-desktop]").innerHTML = NAV.map(navLink("font-display text-lg font-semibold text-chalk hover:text-white")).join("");
+        $("[data-nav-mobile]").innerHTML = NAV.map(navLink("font-display text-2xl font-semibold text-chalk")).join("");
+        $("[data-nav-footer]").innerHTML = [["Home", DEALER.dc.home, true], ...NAV].map(navLink("hover:text-white")).join("");
+
+        $("[data-rail]").innerHTML = FEATURED.map(v => `
+      <a href="${v.url}" target="_blank" rel="noopener noreferrer" class="group w-[78vw] shrink-0 overflow-hidden rounded-lg border border-white/10 bg-asphalt sm:w-[340px]">
+        <div class="relative">
+          <img src="${v.img}" alt="${v.title}" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+          <p class="tag absolute bottom-3 left-3 rounded-sm bg-brand px-3 py-1.5 text-3xl text-white">${money(v.price)}</p>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display text-2xl font-bold leading-tight text-white">${v.title}</h3>
+          <p class="mt-1.5 text-sm text-smoke">${milesFmt(v.miles)} · ${v.spec}</p>
+          <span class="mt-4 inline-flex items-center gap-1.5 font-display text-base font-semibold uppercase tracking-wide text-steel group-hover:text-white">View photos & CarFax <i data-lucide="arrow-up-right" class="h-4 w-4"></i></span>
+        </div>
+      </a>`).join("");
+
+        $("[data-browse]").innerHTML = BROWSE.map(([t, d, href, icon]) => `
+      <a href="${href}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 rounded-lg border border-white/10 bg-asphalt p-5 hover:border-brand">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-brand/15 text-brand"><i data-lucide="${icon}" class="h-5 w-5"></i></span>
+        <span><span class="block font-display text-xl font-bold text-white">${t}</span><span class="block text-sm text-smoke">${d}</span></span>
+      </a>`).join("");
+
+        $("[data-steps]").innerHTML = STEPS.map(([t, d], i) => `
+      <li class="rounded-lg border border-white/10 bg-tarmac p-6">
+        <span class="tag text-5xl text-brand">${i + 1}</span>
+        <h3 class="mt-3 font-display text-2xl font-bold text-white">${t}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-steel">${d}</p>
+      </li>`).join("");
+
+        const reviewsWrap = $("[data-reviews]");
+        if (REVIEWS.length) {
+            reviewsWrap.innerHTML = REVIEWS.map(r => `
+        <figure class="rounded-lg border border-white/10 bg-asphalt p-6">
+          <blockquote class="text-chalk">“${r.quote}”</blockquote>
+          <figcaption class="mt-5 text-sm font-semibold text-steel">${r.name} · Google review</figcaption>
+        </figure>`).join("");
+        } else {
+            reviewsWrap.innerHTML = `<p class="text-steel md:col-span-3">Reviews from real 4M Cars customers will appear here. Until then, read them directly on Google.</p>`;
+        }
+
+        $("[data-faq]").innerHTML = FAQS.map(([q, a], i) => `
+      <details class="group py-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-semibold text-white">
+          ${q}<i data-lucide="plus" class="h-5 w-5 shrink-0 text-steel transition-transform group-open:rotate-45"></i>
+        </summary>
+        <p class="mt-3 max-w-2xl leading-relaxed text-steel">${a}</p>
+      </details>`).join("");
+
+        $$("[data-hours]").forEach(dl => dl.innerHTML = DEALER.hours.map(([d, h]) => `<dt class="font-semibold">${d}</dt><dd>${h}</dd>`).join(""));
+
+        // ---------- BEHAVIOUR ----------
+        const toggle = $("[data-menu-toggle]"), mobile = $("[data-mobile-menu]");
+        toggle.addEventListener("click", () => {
+            const open = mobile.classList.toggle("hidden") === false;
+            toggle.setAttribute("aria-expanded", String(open));
+        });
+
+        const rail = $("[data-rail]");
+        const step = () => Math.min(rail.clientWidth * 0.8, 700);
+        $("[data-rail-prev]").addEventListener("click", () => rail.scrollBy({ left: -step(), behavior: "smooth" }));
+        $("[data-rail-next]").addEventListener("click", () => rail.scrollBy({ left: step(), behavior: "smooth" }));
+
+        // Lead form → replace the TODO with the GHL form/webhook POST for 4M's sub-account
+        const form = $("[data-lead-form]"), success = $("[data-lead-success]"), err = $("[data-form-error]");
+        form.addEventListener("submit", async e => {
+            e.preventDefault();
+            err.classList.add("hidden");
+            const data = Object.fromEntries(new FormData(form).entries());
+            if (!data.name || !data.phone) { err.textContent = "Add your name and phone so we can confirm the time."; err.classList.remove("hidden"); return; }
+            try {
+                // TODO: await fetch("GHL_WEBHOOK_URL", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+                form.classList.add("hidden"); success.classList.remove("hidden"); success.scrollIntoView({ block: "center" });
+            } catch (_) {
+                err.textContent = "That didn't go through. Call or WhatsApp us and we'll book it by hand."; err.classList.remove("hidden");
+            }
+        });
+        $("[data-lead-reset]").addEventListener("click", () => { form.reset(); success.classList.add("hidden"); form.classList.remove("hidden"); });
+
+        // GHL chat widget
+        if (DEALER.ghlWidgetId && !DEALER.ghlWidgetId.startsWith("REPLACE")) {
+            const s = document.createElement("script");
+            s.src = "https://widgets.leadconnectorhq.com/loader.js";
+            s.setAttribute("data-resources-url", "https://widgets.leadconnectorhq.com/chat-widget/loader.js");
+            s.setAttribute("data-widget-id", DEALER.ghlWidgetId);
+            document.body.appendChild(s);
+        }
+
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

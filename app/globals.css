@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dealer tokens (--brand, --brand-hover and their rgb channel triples) are set
+   on :root by app/layout.tsx from theme.brand / theme.brandHover in
+   dealer-config.json. Edit the JSON, not this file. */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Keyboard focus that stays visible on dark */
+  :focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Diagonal hatch — a nod to the texture on their current DealerCenter site */
+  .hatch {
+    background-color: #1c1d20;
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      transparent 1px 9px
+    );
+  }
+
+  /* Brushed-steel top rule used on section headers */
+  .steel-rule {
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      #e9ebee,
+      #9da1a7 40%,
+      var(--brand) 40%,
+      var(--brand) 100%
+    );
+  }
+
+  /* Inventory rail: scroll-snap, hidden scrollbar */
+  .rail {
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rail > * {
+    scroll-snap-align: start;
+  }
+
+  /* Price tag: condensed, tight, big — the memorable element */
+  .tag {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 0.9;
+  }
+
+  .brand-btn {
+    background: var(--brand);
+  }
+
+  .brand-btn:hover {
+    background: var(--brand-hover);
+  }
+}
+
+/* Single page-load moment: hero copy only */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Prose styles for the three compliance pages, so their bodies stay plain
+   semantic HTML (h2 / p / ul / li) and read as dealer-neutral templates.
+--------------------------------------------------------------------------- */
+@layer components {
+  .legal h2 {
+    @apply mt-10 font-display text-2xl font-bold uppercase tracking-wide text-white sm:text-3xl;
+  }
+
+  .legal h2:first-child {
+    @apply mt-0;
+  }
+
+  .legal h3 {
+    @apply mt-7 font-display text-xl font-semibold uppercase tracking-wide text-chalk;
+  }
+
+  .legal p {
+    @apply mt-4 leading-relaxed text-steel;
+  }
+
+  .legal ul {
+    @apply mt-4 list-disc space-y-2 pl-6 leading-relaxed text-steel;
+  }
+
+  .legal li::marker {
+    color: var(--brand);
+  }
+
+  .legal strong {
+    @apply font-semibold text-chalk;
+  }
+
+  .legal a {
+    @apply underline decoration-white/30 underline-offset-4 hover:text-white;
+  }
+}

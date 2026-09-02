@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}" />
+  <link rel="canonical" href="{{SITE_URL}}/" />
+  <meta name="theme-color" content="#1C1D20" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:site_name" content="{{DEALER_NAME}}" />
+  <meta property="og:title" content="{{OG_TITLE}}" />
+  <meta property="og:description" content="{{OG_DESCRIPTION}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{SITE_URL}}/" />
+  <meta property="og:image" content="{{OG_IMAGE_ABSOLUTE}}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{{DEALER_NAME}} — trucks, Jeeps and 4x4s on Landstreet Rd, Orlando" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{OG_TITLE}}" />
+  <meta name="twitter:description" content="{{OG_DESCRIPTION}}" />
+  <meta name="twitter:image" content="{{OG_IMAGE_ABSOLUTE}}" />
+
+  <link rel="icon" type="image/png" href="{{FAVICON}}" />
+  <link rel="apple-touch-icon" href="{{APPLE_TOUCH_ICON}}" />
+
+  <!-- Fonts: Barlow Condensed (display) + Barlow (body). Automotive, athletic. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  {{STYLES_TAG}}
+  {{HEAD_GTM}}
+  {{JSONLD}}
+</head>
+
+<body class="min-h-screen bg-asphalt font-sans text-chalk selection:bg-brand/50">
+  {{BODY_GTM}}
+
+  <a href="#top"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-asphalt"
+    data-i18n="a11y.skipToContent">Skip to content</a>
+
+  <!-- Announcement bar -->
+  <aside aria-label="Dealer highlights" class="bg-brand px-4 py-2 text-center text-sm font-semibold text-white">
+    <span class="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+      {{ICON:shield-check:h-4 w-4}}
+      <span data-i18n="bar.warranty">3-month warranty on every vehicle</span>
+      <span aria-hidden="true" class="hidden h-1 w-1 rounded-full bg-white/70 sm:block"></span>
+      <span class="hidden sm:inline" data-i18n="bar.financing">Financing with passport or ITIN</span>
+      <span aria-hidden="true" class="hidden h-1 w-1 rounded-full bg-white/70 md:block"></span>
+      <span class="hidden md:inline" data-i18n="bar.spanish">Hablamos español</span>
+    </span>
+  </aside>
+
+  <!-- Header — nav mirrors the original DealerCenter site 1:1 and deep-links to it -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-asphalt/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8">
+      <a href="#top" class="flex items-center" aria-label="{{DEALER_NAME}} home">
+        <img src="{{LOGO_SRC}}" alt="{{LOGO_ALT}}" width="190" height="45"
+          class="h-9 w-auto object-contain sm:h-11" />
+      </a>
+
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="Main">{{NAV_DESKTOP}}</nav>
+
+      <div class="hidden items-center gap-4 lg:flex">
+        <a href="tel:{{PHONE_TEL}}" class="flex items-center gap-2 font-display text-lg font-semibold text-chalk hover:text-white">
+          {{ICON:phone:h-4 w-4 text-brand}}<span>{{PHONE_DISPLAY}}</span>
+        </a>
+        <a href="{{DC_APPLY}}" target="_blank" rel="noopener noreferrer"
+          class="brand-btn rounded-md px-5 py-2.5 font-display text-lg font-bold uppercase tracking-wide text-white transition-colors"
+          data-i18n="cta.applyOnline">Apply online</a>
+      </div>
+
+      <button type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle
+        class="flex h-10 w-10 items-center justify-center rounded-md border border-white/20 text-chalk lg:hidden">
+        {{ICON:menu:h-5 w-5}}
+      </button>
+    </div>
+
+    <div id="mobile-menu" data-mobile-menu class="hidden border-t border-white/10 bg-asphalt px-5 py-5 lg:hidden">
+      <nav class="flex flex-col gap-4" aria-label="Main (mobile)">{{NAV_MOBILE}}</nav>
+      <a href="tel:{{PHONE_TEL}}" class="mt-5 flex items-center gap-2 font-display text-xl font-semibold text-chalk">
+        {{ICON:phone:h-4 w-4 text-brand}}<span>{{PHONE_DISPLAY}}</span>
+      </a>
+      <a href="{{DC_APPLY}}" target="_blank" rel="noopener noreferrer"
+        class="brand-btn mt-4 block rounded-md px-5 py-3 text-center font-display text-lg font-bold uppercase tracking-wide text-white"
+        data-i18n="cta.applyOnline">Apply online</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hatch relative overflow-hidden">
+      <div class="mx-auto grid max-w-7xl items-end gap-10 px-5 pb-10 pt-14 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:pb-14 lg:pt-20">
+        <div class="rise">
+          <p class="font-display text-xl font-semibold text-steel" data-i18n="hero.eyebrow">Landstreet Rd, Orlando</p>
+          <h1 class="mt-3 font-display text-6xl font-black uppercase leading-[0.88] tracking-tight text-white sm:text-7xl lg:text-8xl"
+            data-i18n-html="hero.headline">
+            Trucks, Jeeps,<br />and 4x4s<br />built for Florida.
+          </h1>
+          <p class="mt-6 max-w-lg text-lg leading-relaxed text-steel" data-i18n="hero.body">
+            {{INVENTORY_COUNT}} used trucks, Jeeps, SUVs and cars on the lot right now, every one with a 3-month
+            warranty. Financing with a passport or ITIN, from $1,500 down. Come see it, drive it, and drive it home.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="{{DC_INVENTORY}}" target="_blank" rel="noopener noreferrer"
+              class="brand-btn inline-flex items-center justify-center gap-2 rounded-md px-7 py-4 font-display text-xl font-bold uppercase tracking-wide text-white transition-colors">
+              <span data-i18n="cta.seeAll">See all {{INVENTORY_COUNT}} vehicles</span> {{ICON:arrow-right:h-5 w-5}}
+            </a>
+            <a href="#test-drive"
+              class="inline-flex items-center justify-center gap-2 rounded-md border border-white/30 px-7 py-4 font-display text-xl font-bold uppercase tracking-wide text-white transition-colors hover:border-white hover:bg-white/5"
+              data-i18n="cta.bookTestDrive">Book a test drive</a>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-smoke">
+            <span class="flex items-center gap-2">{{ICON:shield-check:h-4 w-4 text-brand}}<span
+                data-i18n="hero.badge1">3-month warranty</span></span>
+            <span class="flex items-center gap-2">{{ICON:file-badge:h-4 w-4 text-brand}}<span
+                data-i18n="hero.badge2">Passport / ITIN financing</span></span>
+            <span class="flex items-center gap-2">{{ICON:languages:h-4 w-4 text-brand}}<span
+                data-i18n="hero.badge3">English &amp; Spanish</span></span>
+          </div>
+        </div>
+
+        <!-- Hero catalogue. Slide 1 is in the HTML and is the LCP image; the rest
+             are fetched on demand by app.js. With no JS this is a static hero. -->
+        <div class="relative" data-hero data-interval="{{HERO_INTERVAL}}" role="group"
+          aria-roledescription="carousel" aria-label="Vehicles on the lot">
+          <div class="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-tarmac">{{HERO_SLIDES}}
+            <!-- Keeps the caption and dots legible over any photo -->
+            <div aria-hidden="true"
+              class="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-asphalt/80 to-transparent">
+            </div>
+          </div>
+
+          <!-- bottom-9 clears the address strip burned into the dealer's photos -->
+          <div class="absolute bottom-9 left-4 rounded-md bg-asphalt/90 px-4 py-3">
+            <p class="font-display text-sm font-semibold uppercase tracking-wider text-steel" data-i18n="hero.tagTop">On
+              the lot now</p>
+            <p class="font-display text-2xl font-bold text-white" data-hero-caption>{{HERO_FIRST_CAPTION}}</p>
+          </div>
+
+          <!-- Controls are revealed by app.js — without it they would do nothing -->
+          <div data-hero-controls hidden>
+            <button type="button" data-hero-prev aria-label="Previous vehicle"
+              class="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md border border-white/25 bg-asphalt/80 text-white backdrop-blur transition-colors hover:bg-asphalt">{{ICON:chevron-left:h-5
+              w-5}}</button>
+            <button type="button" data-hero-next aria-label="Next vehicle"
+              class="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md border border-white/25 bg-asphalt/80 text-white backdrop-blur transition-colors hover:bg-asphalt">{{ICON:chevron-right:h-5
+              w-5}}</button>
+            <div data-hero-dots class="absolute bottom-9 right-4 hidden items-end gap-1.5 pb-1 sm:flex">{{HERO_DOTS}}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INVENTORY RAIL ================= -->
+    <section id="inventory" class="border-y border-white/10 bg-tarmac py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="steel-rule w-24"></div>
+        <div class="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <h2 class="font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl"
+              data-i18n="inventory.heading">Just landed</h2>
+            <p class="mt-3 max-w-xl text-steel" data-i18n="inventory.body">Real prices, real mileage, no "call for
+              price." Tap a vehicle to see photos, CarFax and the window sticker on our inventory site.</p>
+          </div>
+          <div class="flex gap-2">
+            <button type="button" data-rail-prev aria-label="Previous vehicles" aria-controls="inventory-rail"
+              class="flex h-11 w-11 items-center justify-center rounded-md border border-white/20 text-white hover:bg-white/5">{{ICON:chevron-left:h-5
+              w-5}}</button>
+            <button type="button" data-rail-next aria-label="Next vehicles" aria-controls="inventory-rail"
+              class="flex h-11 w-11 items-center justify-center rounded-md border border-white/20 text-white hover:bg-white/5">{{ICON:chevron-right:h-5
+              w-5}}</button>
+          </div>
+        </div>
+
+        <div id="inventory-rail" data-rail tabindex="0" role="group" aria-label="Featured vehicles"
+          class="rail mt-10 -mx-5 flex gap-5 overflow-x-auto px-5 pb-4 sm:mx-0 sm:px-0">{{RAIL}}</div>
+
+        <!-- Browse shortcuts → DealerCenter sort/filter URLs -->
+        <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{{BROWSE}}</div>
+      </div>
+    </section>
+
+    <!-- ================= WARRANTY ================= -->
+    <section id="warranty" class="hatch py-16 sm:py-20">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-2">
+        <div>
+          <div class="steel-rule w-24"></div>
+          <h2 class="mt-5 font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl"
+            data-i18n="warranty.heading">Every car leaves with a 3-month warranty</h2>
+          <p class="mt-5 max-w-xl text-lg text-steel" data-i18n="warranty.body">Most small lots sell as-is. We don't.
+            Every vehicle at {{DEALER_SHORT_NAME}} is inspected before it's listed and covered for three months after you drive off,
+            so the first oil change isn't the first surprise.</p>
+          <ul class="mt-7 space-y-3 text-chalk">
+            <li class="flex items-start gap-3">{{ICON:check:mt-1 h-5 w-5 shrink-0 text-brand}}<span
+                data-i18n="warranty.point1">Inspected before listing: runs, drives, cold A/C, no leaks</span></li>
+            <li class="flex items-start gap-3">{{ICON:check:mt-1 h-5 w-5 shrink-0 text-brand}}<span
+                data-i18n="warranty.point2">Clean titles, CarFax available on every listing</span></li>
+            <li class="flex items-start gap-3">{{ICON:check:mt-1 h-5 w-5 shrink-0 text-brand}}<span
+                data-i18n="warranty.point3">3 months of coverage included in the price</span></li>
+          </ul>
+          <a href="{{DC_WARRANTY}}" target="_blank" rel="noopener noreferrer"
+            class="mt-8 inline-flex items-center gap-2 rounded-md border border-white/30 px-6 py-3 font-display text-lg font-bold uppercase tracking-wide text-white hover:border-white hover:bg-white/5"><span
+              data-i18n="cta.warrantyDetails">Read the warranty details</span> {{ICON:arrow-up-right:h-4 w-4}}</a>
+        </div>
+        <div class="relative">
+          <img src="{{WARRANTY_SRC}}" alt="{{WARRANTY_ALT}}" width="{{WARRANTY_W}}" height="{{WARRANTY_H}}"
+            class="aspect-[5/4] w-full rounded-lg object-cover" loading="lazy" decoding="async" />
+          <div class="absolute -bottom-5 -left-3 rounded-md bg-brand px-6 py-4 sm:-left-6">
+            <p class="tag text-6xl text-white">3<span class="text-3xl">mo</span></p>
+            <p class="mt-1 font-display font-semibold uppercase tracking-wider text-white"
+              data-i18n="warranty.badge">Warranty included</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FINANCING ================= -->
+    <section id="financing" class="border-y border-white/10 bg-tarmac py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="steel-rule w-24"></div>
+        <div class="mt-5 grid gap-10 lg:grid-cols-[1fr_1fr]">
+          <div>
+            <h2 class="font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl"
+              data-i18n="financing.heading">Financing that works with your situation</h2>
+            <p class="mt-5 max-w-xl text-lg text-steel" data-i18n="financing.body">No social? No problem. We finance
+              with a passport or ITIN, and we work with first-time buyers and every credit tier. Start with as little as
+              $1,500 down.</p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="{{DC_APPLY}}" target="_blank" rel="noopener noreferrer"
+                class="brand-btn inline-flex items-center justify-center gap-2 rounded-md px-7 py-4 font-display text-xl font-bold uppercase tracking-wide text-white transition-colors"><span
+                  data-i18n="cta.applyNow">Apply online now</span> {{ICON:arrow-up-right:h-5 w-5}}</a>
+              <a href="{{WHATSAPP}}" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 rounded-md border border-white/30 px-7 py-4 font-display text-xl font-bold uppercase tracking-wide text-white hover:border-white hover:bg-white/5">{{ICON:message-circle:h-5
+                w-5}}<span data-i18n="cta.whatsapp">Ask on WhatsApp</span></a>
+            </div>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div class="rounded-lg border border-white/10 bg-asphalt p-6">
+              <p class="tag text-5xl text-white">$1,500</p>
+              <p class="mt-2 font-display text-lg font-semibold uppercase tracking-wide text-steel"
+                data-i18n="financing.stat1">Down to start</p>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-asphalt p-6">
+              <p class="tag text-5xl text-white">ITIN</p>
+              <p class="mt-2 font-display text-lg font-semibold uppercase tracking-wide text-steel"
+                data-i18n="financing.stat2">Or passport accepted</p>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-asphalt p-6">
+              <p class="tag text-5xl text-white">All</p>
+              <p class="mt-2 font-display text-lg font-semibold uppercase tracking-wide text-steel"
+                data-i18n="financing.stat3">Credit tiers reviewed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section id="how" class="hatch py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="steel-rule w-24"></div>
+        <h2 class="mt-5 font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl"
+          data-i18n="how.heading">Find it tonight, drive it tomorrow</h2>
+        <ol class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">{{STEPS}}</ol>
+      </div>
+    </section>
+
+    <!-- ================= REVIEWS ================= -->
+    <section id="reviews" class="border-y border-white/10 bg-tarmac py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="steel-rule w-24"></div>
+        <div class="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <h2 class="font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl"
+            data-i18n="reviews.heading">What buyers say</h2>
+          <a href="{{GOOGLE_REVIEWS_URL}}" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 font-display text-lg font-semibold text-steel hover:text-white"><span
+              data-i18n="reviews.link">Read our Google reviews</span> {{ICON:arrow-up-right:h-4 w-4}}</a>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{{REVIEWS}}</div>
+      </div>
+    </section>
+
+    <!-- ================= TEST DRIVE FORM → GHL ================= -->
+    <section id="test-drive" class="hatch py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-5 sm:px-8">
+        <div class="rounded-lg border border-white/10 bg-tarmac p-7 sm:p-10">
+          <h2 class="font-display text-4xl font-black uppercase leading-none text-white sm:text-5xl"
+            data-i18n="form.heading">Book a test drive</h2>
+          <p class="mt-3 text-steel" data-i18n="form.body">Tell us which vehicle and when. We'll have it pulled up front
+            and ready when you arrive. Reserva tu prueba de manejo — te atendemos en español.</p>
+
+          <form data-lead-form class="mt-8 space-y-5" novalidate>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="lead-name" class="mb-2 block text-sm font-semibold text-chalk"
+                  data-i18n="form.name">Full name</label>
+                <input id="lead-name" name="name" autocomplete="name" required aria-required="true"
+                  class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                  placeholder="Carlos Rivera" />
+              </div>
+              <div>
+                <label for="lead-phone" class="mb-2 block text-sm font-semibold text-chalk"
+                  data-i18n="form.phone">Phone</label>
+                <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required aria-required="true"
+                  class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                  placeholder="(321) 555-0100" />
+              </div>
+            </div>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="lead-email" class="mb-2 block text-sm font-semibold text-chalk"
+                  data-i18n="form.email">Email</label>
+                <input id="lead-email" name="email" type="email" autocomplete="email"
+                  class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                  placeholder="carlos@email.com" />
+              </div>
+              <div>
+                <label for="lead-language" class="mb-2 block text-sm font-semibold text-chalk"
+                  data-i18n="form.language">Preferred language</label>
+                <select id="lead-language" name="language"
+                  class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white focus:border-brand focus:outline-none">
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="lead-vehicle" class="mb-2 block text-sm font-semibold text-chalk"
+                data-i18n="form.vehicle">Which vehicle?</label>
+              <input id="lead-vehicle" name="vehicle"
+                class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                placeholder="e.g. 2019 F-150, a lifted Jeep, or anything under $10K" />
+            </div>
+            <div>
+              <label for="lead-when" class="mb-2 block text-sm font-semibold text-chalk" data-i18n="form.when">When
+                works for you?</label>
+              <input id="lead-when" name="when"
+                class="w-full rounded-md border border-white/15 bg-asphalt px-4 py-3 text-white placeholder-smoke focus:border-brand focus:outline-none"
+                placeholder="Saturday afternoon, tomorrow after 5, etc." />
+            </div>
+
+            <!-- SMS consent — carrier-required language, keep verbatim -->
+            <fieldset class="space-y-3 rounded-md border border-white/10 bg-asphalt p-5">
+              <legend class="sr-only">Text message consent</legend>
+              <div class="flex items-start gap-3">
+                <input type="checkbox" id="lead-sms-marketing" name="sms_marketing" value="yes"
+                  class="mt-1 h-4 w-4 shrink-0 accent-[var(--brand)]" />
+                <label for="lead-sms-marketing" class="text-sm leading-relaxed text-steel">I consent to receive
+                  marketing text messages about special offers, discounts, and service updates from {{DEALER_NAME}} at
+                  the phone number provided. Message frequency may vary. Message and data rates may apply. Text HELP for
+                  assistance, reply STOP to opt out.</label>
+              </div>
+              <div class="flex items-start gap-3">
+                <input type="checkbox" id="lead-sms-nonmarketing" name="sms_nonmarketing" value="yes"
+                  class="mt-1 h-4 w-4 shrink-0 accent-[var(--brand)]" />
+                <label for="lead-sms-nonmarketing" class="text-sm leading-relaxed text-steel">I consent to receive
+                  non-marketing text messages from {{DEALER_NAME}} about vehicle inquiries, vehicle availability,
+                  financing updates, appointment reminders, and service-related updates. Message frequency may vary.
+                  Message and data rates may apply. Text HELP for assistance, reply STOP to opt out.</label>
+              </div>
+            </fieldset>
+
+            <p data-form-error role="alert" aria-live="polite" class="hidden text-sm text-red-300"></p>
+            <button type="submit"
+              class="brand-btn w-full rounded-md px-6 py-4 font-display text-xl font-bold uppercase tracking-wide text-white transition-colors disabled:cursor-not-allowed disabled:opacity-70"
+              data-i18n="cta.submit">Book my test drive</button>
+            <p class="text-center text-xs leading-relaxed text-smoke">By submitting, you consent to be contacted by
+              {{DEALER_NAME}} via call and email regarding your inquiry. SMS consent is optional and not required to
+              submit this form. Consent is not a condition of purchase. See our
+              <a href="/privacy-policy.html" class="underline hover:text-chalk">Privacy Policy</a> and
+              <a href="/sms-disclosure.html" class="underline hover:text-chalk">SMS Disclosure</a>.</p>
+          </form>
+
+          <div data-lead-success tabindex="-1"
+            class="mt-8 hidden rounded-md border border-brand/40 bg-brand/10 p-8 text-center">
+            {{ICON:check-circle-2:mx-auto h-12 w-12 text-brand}}
+            <h3 class="mt-4 font-display text-3xl font-bold uppercase text-white" data-i18n="form.successHeading">Test
+              drive booked</h3>
+            <p class="mt-2 text-steel" data-i18n="form.successBody">We'll confirm by text or call shortly and have the
+              vehicle ready when you arrive.</p>
+            <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+              <a href="{{DC_INVENTORY}}" target="_blank" rel="noopener noreferrer"
+                class="rounded-md border border-white/30 px-6 py-3 font-display text-lg font-bold uppercase tracking-wide text-white hover:bg-white/5"
+                data-i18n="cta.keepBrowsing">Keep browsing</a>
+              <button type="button" data-lead-reset
+                class="rounded-md border border-white/30 px-6 py-3 font-display text-lg font-bold uppercase tracking-wide text-white hover:bg-white/5"
+                data-i18n="cta.bookAnother">Book another</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq" class="border-y border-white/10 bg-tarmac py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-5 sm:px-8">
+        <div class="steel-rule w-24"></div>
+        <h2 class="mt-5 font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl"
+          data-i18n="faq.heading">Questions, answered</h2>
+        <div class="mt-8 divide-y divide-white/10 border-y border-white/10">{{FAQ}}</div>
+      </div>
+    </section>
+
+    <!-- ================= VISIT ================= -->
+    <section id="visit" class="hatch py-16 sm:py-20">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_1.2fr]">
+        <div>
+          <div class="steel-rule w-24"></div>
+          <h2 class="mt-5 font-display text-5xl font-black uppercase leading-none text-white sm:text-6xl"
+            data-i18n="visit.heading">Come see us on Landstreet</h2>
+          <p class="mt-4 text-steel" data-i18n="visit.body">Inside the Landstreet Automall, south of the airport. Pull
+            in, walk the lot, no appointment needed.</p>
+          <address class="mt-7 space-y-4 not-italic text-chalk">
+            <p class="flex items-start gap-3">{{ICON:map-pin:mt-1 h-5 w-5 shrink-0
+              text-brand}}<span>{{ADDRESS_LINE1}}<br />{{ADDRESS_LINE2}}</span></p>
+            <p class="flex items-center gap-3">{{ICON:phone:h-5 w-5 shrink-0 text-brand}}<a href="tel:{{PHONE_TEL}}"
+                class="font-semibold hover:text-white">{{PHONE_DISPLAY}}</a></p>
+            <p class="flex items-center gap-3">{{ICON:mail:h-5 w-5 shrink-0 text-brand}}<a href="mailto:{{EMAIL}}"
+                class="hover:text-white">{{EMAIL}}</a></p>
+          </address>
+          <dl class="mt-7 grid max-w-sm grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-chalk">{{HOURS}}</dl>
+          <a href="{{MAPS_URL}}" target="_blank" rel="noopener noreferrer"
+            class="mt-8 inline-flex items-center gap-2 rounded-md border border-white/30 px-6 py-3 font-display text-lg font-bold uppercase tracking-wide text-white hover:border-white hover:bg-white/5"><span
+              data-i18n="cta.directions">Get directions</span> {{ICON:navigation:h-4 w-4}}</a>
+        </div>
+        <div class="overflow-hidden rounded-lg border border-white/10">
+          <iframe title="Map to {{DEALER_NAME}} at {{ADDRESS_LINE1}}, {{ADDRESS_LINE2}}" src="{{MAP_EMBED}}"
+            class="h-[360px] w-full grayscale invert-[.92] contrast-[.9] lg:h-full" loading="lazy" width="600"
+            height="360" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-white/10 bg-asphalt">
+    <div class="mx-auto max-w-7xl px-5 py-14 sm:px-8">
+      <div class="grid gap-10 md:grid-cols-3">
+        <div>
+          <img src="{{LOGO_SRC}}" alt="{{LOGO_ALT}}" width="190" height="45" loading="lazy"
+            class="h-11 w-auto object-contain" />
+          <p class="mt-4 max-w-xs text-sm leading-relaxed text-smoke" data-i18n="footer.blurb">Used trucks, Jeeps, SUVs
+            and cars on Landstreet Rd, Orlando. 3-month warranty, financing with passport or ITIN. Hablamos español.</p>
+          <div class="mt-5 flex gap-3">
+            <a href="{{INSTAGRAM}}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+              class="flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-steel hover:border-brand hover:text-white">{{ICON:instagram:h-4
+              w-4}}</a>
+            <a href="{{WHATSAPP}}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+              class="flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-steel hover:border-brand hover:text-white">{{ICON:message-circle:h-4
+              w-4}}</a>
+            <a href="{{GOOGLE_REVIEWS_URL}}" target="_blank" rel="noopener noreferrer"
+              aria-label="Google Business Profile"
+              class="flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-steel hover:border-brand hover:text-white">{{ICON:map-pin:h-4
+              w-4}}</a>
+          </div>
+        </div>
+        <div>
+          <h2 class="font-display text-lg font-bold uppercase tracking-wider text-steel" data-i18n="footer.visit">Visit
+            us</h2>
+          <p class="mt-4 text-sm text-chalk">{{ADDRESS_LINE1}}<br />{{ADDRESS_LINE2}}</p>
+          <a href="tel:{{PHONE_TEL}}"
+            class="mt-3 block font-display text-xl font-semibold text-white">{{PHONE_DISPLAY}}</a>
+          <dl class="mt-4 grid max-w-xs grid-cols-[auto_1fr] gap-x-5 gap-y-1 text-sm text-smoke">{{HOURS}}</dl>
+        </div>
+        <div>
+          <h2 class="font-display text-lg font-bold uppercase tracking-wider text-steel" data-i18n="footer.links">Quick
+            links</h2>
+          <nav class="mt-4 flex flex-col gap-2.5 text-sm text-smoke" aria-label="Footer">{{NAV_FOOTER}}</nav>
+        </div>
+      </div>
+      <div
+        class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-smoke sm:flex-row">
+        <p>© {{YEAR}} {{DEALER_NAME}}. All rights reserved.</p>
+        <div class="flex flex-wrap items-center gap-x-4">
+          <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+          <a href="/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+          <a href="/sms-disclosure.html" class="hover:text-white">SMS Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Crawlable fallback for A2P validators (no-JS) -->
+  <noscript>
+    <div style="padding:16px;font-family:sans-serif;color:#F2F1EE;background:#1C1D20">
+      <p>{{DEALER_NAME}} — {{ADDRESS_LINE1}}, {{ADDRESS_LINE2}} — {{PHONE_DISPLAY}} — {{EMAIL}}</p>
+      <p>By providing your phone number you agree to receive text messages from {{DEALER_NAME}}.
+        Message frequency varies.
+        Message and data rates may apply.
+        Reply STOP to opt out or HELP for help.
+        Consent is not a condition of purchase.
+        No mobile information will be shared with third parties or affiliates for marketing purposes.</p>
+      <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms-of-service.html">Terms of Service</a> | <a
+          href="/sms-disclosure.html">SMS Disclosure</a></p>
+    </div>
+  </noscript>
+
+  {{CONFIG_SCRIPT}}
+  {{APP_SCRIPT}}
+</body>
+
+</html>

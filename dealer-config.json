@@ -1,0 +1,159 @@
+{
+  "_readme": "Single source of truth for this dealer. Swapping this file (plus dropping new photos into public/) re-brands the whole site. Nothing dealer-specific is hardcoded in app/ or components/. Secrets and third-party ids do NOT live here — they are environment variables, see .env.example.",
+
+  "theme": {
+    "_comment": "The only two colors that change per dealer. Everything else is the shared automotive palette in tailwind.config.js. app/layout.tsx derives --brand, --brand-hover and their rgb channel triples from these.",
+    "brand": "#D71920",
+    "brandHover": "#B8141A"
+  },
+
+  "dealer": {
+    "name": "4M Cars LLC",
+    "shortName": "4M Cars",
+    "legalName": "4M Cars LLC",
+    "phoneDisplay": "(321) 310-5159",
+    "phoneTel": "+13213105159",
+    "whatsapp": "https://wa.me/13213105159",
+    "email": "4mcarsllc@gmail.com",
+    "address": {
+      "line1": "1543 W Landstreet Rd",
+      "line2": "Orlando, FL 32824",
+      "street": "1543 W Landstreet Rd",
+      "city": "Orlando",
+      "region": "FL",
+      "postalCode": "32824",
+      "country": "US"
+    },
+    "_addressNote": "Directories also list 1455 Ste 405 and 1477 Ste A on W Landstreet Rd. 1543 is what the dealer publishes on their own site. Confirm before launch.",
+    "mapsUrl": "https://maps.app.goo.gl/aY1vFDcGh2sJPYKU7",
+    "googleReviewsUrl": "https://share.google/HLoHSlwFVR2nLjspr",
+    "instagram": "https://www.instagram.com/4mcarsflorida",
+    "tiktok": "https://www.tiktok.com/@4mcarsflorida",
+    "inventoryCount": "50+",
+    "languages": ["English", "Spanish"],
+    "hours": [
+      { "label": "Mon – Fri", "value": "10:00 AM – 7:00 PM", "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:00", "closes": "19:00" },
+      { "label": "Sat", "value": "10:30 AM – 6:00 PM", "days": ["Saturday"], "opens": "10:30", "closes": "18:00" },
+      { "label": "Sun", "value": "10:00 AM – 7:00 PM", "days": ["Sunday"], "opens": "10:00", "closes": "19:00" }
+    ],
+    "dc": {
+      "_comment": "The dealer's existing DealerCenter site. Every inventory/finance action deep-links here and opens in a new tab. We do not rebuild any of it.",
+      "home": "https://www.4mcars.com/",
+      "inventory": "https://www.4mcars.com/inventory/",
+      "warranty": "https://www.4mcars.com/warranty/",
+      "apply": "https://www.4mcars.com/apply-online/",
+      "about": "https://www.4mcars.com/about-us/",
+      "contact": "https://www.4mcars.com/contact-us/",
+      "testDrive": "https://www.4mcars.com/schedule-a-test-drive/",
+      "priceLowHigh": "https://www.4mcars.com/inventory/?sort_by=price_asc",
+      "priceHighLow": "https://www.4mcars.com/inventory/?sort_by=price_desc",
+      "newestFirst": "https://www.4mcars.com/inventory/?sort_by=year_desc",
+      "lowMiles": "https://www.4mcars.com/inventory/?sort_by=miles_asc"
+    }
+  },
+
+  "site": {
+    "url": "https://4mcars-landing.vercel.app",
+    "_urlNote": "Canonical URL of THIS landing page — the fallback for NEXT_PUBLIC_SITE_URL. Used for canonical + og:url + absolute og:image + sitemap. Update at launch.",
+    "title": "Trucks, Jeeps & Used Cars in Orlando — 4M Cars LLC, Landstreet Rd",
+    "description": "4M Cars LLC on Landstreet Rd, Orlando. 50+ used trucks, Jeeps, SUVs and cars. 3-month warranty, financing with passport or ITIN, $1,500 down. Se habla español.",
+    "ogTitle": "Trucks, Jeeps & Used Cars in Orlando — 4M Cars LLC",
+    "ogDescription": "50+ used trucks, Jeeps, SUVs and cars on Landstreet Rd. 3-month warranty. Financing with passport or ITIN. Se habla español.",
+    "leadSource": "4M Cars landing page"
+  },
+
+  "assets": {
+    "_comment": "Paths are root-relative into public/. next/image handles sizing and format conversion.",
+    "logo": "/img/logo.png",
+    "logoAlt": "4M Cars LLC",
+    "favicon": "/img/favicon.png",
+    "appleTouchIcon": "/img/apple-touch-icon.png",
+    "og": "/img/og.jpg",
+    "hero": {
+      "_comment": "The hero catalogue. Slides cross-fade on a timer and can be stepped with the arrows, dots, arrow keys or a swipe; any manual step stops the timer. Array order is display order — filenames carry no order. Slide 1 is the LCP image and is given priority; the rest are lazy. Drop a photo in public/hero/ and add an entry. Every slide is cropped to 4:3 by the frame.",
+      "width": 1024,
+      "height": 768,
+      "intervalMs": 6000,
+      "captionEyebrow": "On the lot now",
+      "slides": [
+        { "src": "/hero/2015-ram-2500.jpg", "caption": "2015 Ram 2500 · lifted", "alt": "Lifted white 2015 Ram 2500 on the lot at 4M Cars, Orlando" },
+        { "src": "/hero/2013-jeep-wrangler.jpg", "caption": "2013 Jeep Wrangler Unlimited", "alt": "Black 2013 Jeep Wrangler Unlimited on the lot at 4M Cars, Orlando" },
+        { "src": "/hero/2016-ford-f150.jpg", "caption": "2016 Ford F-150", "alt": "Silver 2016 Ford F-150 crew cab on the lot at 4M Cars, Orlando" },
+        { "src": "/hero/toyota-tacoma-lifted.jpg", "caption": "Toyota Tacoma · lifted", "alt": "Lifted blue Toyota Tacoma double cab on the lot at 4M Cars, Orlando" },
+        { "src": "/hero/2018-ford-expedition.jpg", "caption": "2018 Ford Expedition", "alt": "Black 2018 Ford Expedition on the lot at 4M Cars, Orlando" },
+        { "src": "/hero/2012-toyota-tacoma.jpg", "caption": "2012 Toyota Tacoma", "alt": "2012 Toyota Tacoma double cab on the lot at 4M Cars, Orlando" },
+        { "src": "/hero/jeep-gladiator-lifted.jpg", "caption": "Jeep Gladiator · lifted", "alt": "Lifted yellow Jeep Gladiator on the lot at 4M Cars, Orlando", "_lowRes": "Source file is only 259x194 — it will look soft blown up to hero size. Ask the dealer for the full-resolution original, or delete this entry." },
+        { "src": "/hero/2017-ford-mustang.jpg", "caption": "2017 Ford Mustang convertible", "alt": "Silver 2017 Ford Mustang convertible on the lot at 4M Cars, Orlando" }
+      ]
+    },
+    "warranty": {
+      "_comment": "Cropped from the dealer's own 2015 Ram 2500 lot photo. Swap in an inspection-bay / tech-at-work shot when the dealer supplies one.",
+      "src": "/img/warranty.jpg",
+      "width": 1400,
+      "height": 1120,
+      "alt": "2015 Ram 2500 on the lot at 4M Cars, Orlando — every vehicle is inspected before it is listed"
+    }
+  },
+
+  "nav": [
+    { "label": "Inventory", "key": "inventory" },
+    { "label": "Warranty", "key": "warranty" },
+    { "label": "Apply Online", "key": "apply" },
+    { "label": "About Us", "key": "about" },
+    { "label": "Contact Us", "key": "contact" }
+  ],
+
+  "featured": {
+    "_comment": "Hand-maintained from the dealer's own listings and photos. Prices and availability go stale fast — refresh weekly and bump lastRefreshed. `url` should be the real VDP; null falls back to the inventory page. `miles: null` renders \"Mileage on listing\" — leave it null rather than guessing.",
+    "lastRefreshed": "2026-09-02",
+    "vehicles": [
+      { "title": "2019 Ford F-150 SuperCrew", "price": 64990, "miles": 101129, "spec": "4WD \u00b7 Automatic", "img": "/img/2019-ford-f150-supercrew.jpg", "url": null, "_priceFlag": "STILL UNVERIFIED — $64,990 on a 101k-mile 2019 F-150 is far outside the $16,990\u2013$40,990 range of every other card, and this is the first vehicle a visitor sees. Confirm with the dealer or pull the card." },
+      { "title": "2019 Honda Accord Hybrid", "price": 16990, "miles": null, "spec": "Hybrid \u00b7 Sedan", "img": "/img/2019-honda-accord-hybrid.jpg", "url": null },
+      { "title": "2018 Chevrolet Silverado 1500 Double Cab", "price": 19990, "miles": null, "spec": "Double cab", "img": "/img/2018-chevrolet-silverado-1500.jpg", "url": "https://www.4mcars.com/inventory/chevrolet/silverado-1500-double-cab/205000/" },
+      { "title": "2024 Toyota Tundra Double Cab", "price": 40990, "miles": null, "spec": "Double cab", "img": "/img/2024-toyota-tundra-double-cab.jpg", "url": "https://www.4mcars.com/inventory/toyota/tundra-double-cab/156040/" },
+      { "title": "2023 Ram ProMaster Window Van", "price": 29990, "miles": null, "spec": "Window van", "img": "/img/2023-ram-promaster-window-van.jpg", "url": "https://www.4mcars.com/inventory/ram/promaster-window-van/552521/" },
+      { "title": "2012 Ford F-350 Super Duty Crew Cab", "price": 24990, "miles": null, "spec": "Crew cab \u00b7 Dually", "img": "/img/2012-ford-f350-super-duty-crew-cab.jpg", "url": "https://www.4mcars.com/inventory/ford/f350-super-duty-crew-cab/a02190/" }
+    ],
+    "_pending": {
+      "_comment": "Pulled from the rail on 2026-09-02: these two were scraped listings whose only photo was a grey PLACEHOLDER plate, and showing them next to six real photos looked broken. Data kept verbatim so they can go straight back in — add a real photo, verify the price, and move the entry into `vehicles`.",
+      "vehicles": [
+        { "title": "2021 Hyundai Sonata SE", "price": 11999, "miles": 82239, "spec": "FWD \u00b7 Automatic", "img": null, "url": null },
+        { "title": "2017 BMW X3", "price": 9990, "miles": null, "spec": "AWD \u00b7 Automatic", "img": null, "url": null }
+      ]
+    }
+  },
+
+  "browse": [
+    { "title": "Under $10K", "note": "Budget-ready, warranty included", "key": "priceLowHigh", "icon": "wallet" },
+    { "title": "Trucks & 4x4s", "note": "F-150s, Rams, Colorados, Wranglers", "key": "inventory", "icon": "truck" },
+    { "title": "Lowest miles", "note": "Newest arrivals with the least wear", "key": "lowMiles", "icon": "gauge" },
+    { "title": "Newest first", "note": "Latest model years on the lot", "key": "newestFirst", "icon": "sparkles" }
+  ],
+
+  "steps": [
+    { "title": "Pick your vehicle", "body": "Browse the full inventory with real prices, or message us on WhatsApp and we'll send you options." },
+    { "title": "Book a test drive", "body": "Use the form here or chat any hour. We'll have it pulled up front when you pull in." },
+    { "title": "Apply at the lot", "body": "One application from your phone, with a real person next to you explaining your options in English or Spanish." },
+    { "title": "Drive it home", "body": "Paperwork, warranty, keys. Most buyers do the whole thing in one visit." }
+  ],
+
+  "reviews": {
+    "_comment": "Intentionally empty. Do not invent reviews, ratings or review counts. When the dealer supplies real Google reviews, add { \"name\": \"First L.\", \"quote\": \"…\", \"lang\": \"en\" } entries — the section already renders both states.",
+    "items": []
+  },
+
+  "faqs": [
+    { "q": "Do you finance with a passport or ITIN?", "a": "Yes. You don't need a social security number to apply. Bring a passport or ITIN, proof of income and proof of address, and we'll walk you through the options." },
+    { "q": "How much do I need down?", "a": "Financing starts at $1,500 down. The exact number depends on the vehicle and the lender, and we'll tell you before you sign anything." },
+    { "q": "What does the 3-month warranty cover?", "a": "Every vehicle is inspected before it's listed and covered for three months after purchase. Full terms are on our warranty page." },
+    { "q": "Are the prices online the real prices?", "a": "Yes. Every listing shows the actual price and mileage. There are no 'call for pricing' listings." },
+    { "q": "Can I see the CarFax?", "a": "Every listing on our inventory site has a CarFax report and a window sticker you can open before you visit." },
+    { "q": "¿Hablan español?", "a": "Sí. Todo nuestro equipo atiende en español e inglés, y puedes hacer la solicitud de financiamiento en el idioma que prefieras." }
+  ],
+
+  "legal": {
+    "lastUpdated": "September 2, 2026",
+    "governingState": "Florida",
+    "governingVenue": "Orange County, Florida"
+  }
+}
